@@ -3,18 +3,24 @@
     const box = document.querySelector('.box');
     const spin = document.querySelector('.spin');
     const marker = document.querySelector('.marker');
-    const person = document.querySelector('.person');
-    const selected = document.querySelector('.selected');
 
     // Defines variables
     let deg = 0;
-    let teamMembers = 8;
-    let currentWinningNumber = 0;
-    let segment = new Array(teamMembers);
-    let winningOrder = [40, 80, 125, 170, 215, 260, 305, 340];
+    let currentSelectedIndex = 0;
+    const numberOfTeamMembers = 8;
+    let segment = new Array(numberOfTeamMembers);
+    const personArray = new Array(numberOfTeamMembers);
+    const segmentArray = [40, 80, 125, 170, 215, 260, 305, 340];
+    let segmentArrayPerson = new Array(numberOfTeamMembers);
+
 
     // Adds Sound
     let snd = new Audio('./assets/sound.m4a');
+
+    // Selected sticker per person
+    for (let i = 0; i < numberOfTeamMembers; i++) {
+        personArray[i] = document.querySelector(`#box > span.person.person${i}`);
+    }
 
     // Gets week day
     (function getWeekDay() {
@@ -52,53 +58,71 @@
         }
     })();
 
+    // namesEachPerson
+    (function nameEachPerson() {
+        let dictPerson = {
+            40: personArray[0],
+            80: personArray[1],
+            125: personArray[2],
+            170: personArray[3],
+            215: personArray[4],
+            260: personArray[5],
+            305: personArray[6],
+            340: personArray[7]
+        };
+
+        for (let key in dictPerson) {
+            segmentArrayPerson[key] = dictPerson[key];
+        }
+    })();
+
     // Lands on a person
     function hasFallenIntoThatRange() {
-        currentWinningNumber = Math.floor(Math.random() * winningOrder.length);
-        landedNumber = winningOrder[currentWinningNumber];
+        currentSelectedIndex = Math.floor(Math.random() * segmentArray.length);
+        landedNumber = segmentArray[currentSelectedIndex];
         console.log(
-            winningOrder,
-            currentWinningNumber,
-            winningOrder[currentWinningNumber],
-            segment[winningOrder[currentWinningNumber]]
+            segmentArray,
+            currentSelectedIndex,
+            segmentArray[currentSelectedIndex],
+            segment[segmentArray[currentSelectedIndex]]
         );
-        winningOrder.splice(currentWinningNumber, 1);
+        segmentArray.splice(currentSelectedIndex, 1);
         return landedNumber;
     }
 
     // Checks if everyone has been selected
     function hasEveryOneBeenSelected() {
-        if (winningOrder === undefined || winningOrder.length === 0) {
+        if (segmentArray === undefined || segmentArray.length === 0) {
             alert("Everyone's been selected!");
             document.getElementById('spin').disabled = true;
             return;
         }
     }
 
-    // Function to make the selected sticker visible
-    function showSelected() {
-        if (selected.style.display === 'none') {
-            selected.style.display = 'block';
-        }
+    // Makes the selected sticker visible
+    function addsSticker(person) {
+        const url = './assets/images/sticker.png';
+        const image = new Image();
+        image.src = url;
+        image.className = 'selected';
+
+        let toBeAppended = segmentArrayPerson[person];
+        toBeAppended.appendChild(image);
     }
 
-    // Adds the selected sticker on the person's segment
-    person.addEventListener('click', () => {
-        showSelected();
-    });
-
-    // On click on spin
+    // On click on the spin button
     spin.addEventListener('click', () => {
         hasEveryOneBeenSelected();
         spin.getElementsByClassName.pointerEvents = 'none';
         marker.classList.add('animate');
-        deg = hasFallenIntoThatRange();
+        deg = 180 - hasFallenIntoThatRange();
         box.classList.add('animateBox');
         box.style.transform = `rotate(${deg}deg)`;
-
         if (deg > 0) snd.play();
+        addsSticker(landedNumber);
     });
 
+    // When the transition ends
     spin.addEventListener('transitionend', () => {
         spin.style.pointerEvents = 'auto';
         box.style.transition = 'none';
