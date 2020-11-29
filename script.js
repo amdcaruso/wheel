@@ -8,10 +8,10 @@
 
     // Defines variables
     let deg = 0;
-    let teamMembers = 8;
     let currentWinningNumber = 0;
+    let teamMembers = 8;
     let segment = new Array(teamMembers);
-    let winningOrder = [40, 80, 125, 170, 215, 260, 305, 340];
+    let segmentArray = [40, 80, 125, 170, 215, 260, 305, 340];
 
     // Adds Sound
     let snd = new Audio('./assets/sound.m4a');
@@ -54,21 +54,21 @@
 
     // Lands on a person
     function hasFallenIntoThatRange() {
-        currentWinningNumber = Math.floor(Math.random() * winningOrder.length);
-        landedNumber = winningOrder[currentWinningNumber];
+        currentWinningNumber = Math.floor(Math.random() * segmentArray.length);
+        landedNumber = segmentArray[currentWinningNumber];
         console.log(
-            winningOrder,
+            segmentArray,
             currentWinningNumber,
-            winningOrder[currentWinningNumber],
-            segment[winningOrder[currentWinningNumber]]
+            segmentArray[currentWinningNumber],
+            segment[segmentArray[currentWinningNumber]]
         );
-        winningOrder.splice(currentWinningNumber, 1);
+        segmentArray.splice(currentWinningNumber, 1);
         return landedNumber;
     }
 
     // Checks if everyone has been selected
     function hasEveryOneBeenSelected() {
-        if (winningOrder === undefined || winningOrder.length === 0) {
+        if (segmentArray === undefined || segmentArray.length === 0) {
             alert("Everyone's been selected!");
             document.getElementById('spin').disabled = true;
             return;
@@ -92,13 +92,14 @@
         hasEveryOneBeenSelected();
         spin.getElementsByClassName.pointerEvents = 'none';
         marker.classList.add('animate');
-        deg = hasFallenIntoThatRange();
+        deg = 180 - hasFallenIntoThatRange();
         box.classList.add('animateBox');
         box.style.transform = `rotate(${deg}deg)`;
 
         if (deg > 0) snd.play();
     });
 
+    // When the transition ends
     spin.addEventListener('transitionend', () => {
         spin.style.pointerEvents = 'auto';
         box.style.transition = 'none';

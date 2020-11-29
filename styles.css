@@ -35,7 +35,6 @@ body {
     background-image: url('assets/images/wheel.png');
     background-repeat: no-repeat;
     background-size: 100%;
-    /* transform: rotate(180deg); */
     color: white;
 }
 
@@ -116,8 +115,7 @@ body {
     height: 0;
     border-style: solid;
     border-width: 177px 75px 0;
-    border-color: blue transparent;
-    transform-origin: 70px 70px;
+    border-color: transparent;
     left: 50%;
     top: 50%;
     opacity: 1;
