@@ -1,18 +1,31 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Weiben - Wheel of fortune</title>
+
+<head>
+    <title>MDD Standup Wheel</title>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://fonts.googleapis.com/css2?family=Henny+Penny&display=swap" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="styles.css" />
-  </head>
+</head>
 
-  <body>
-    <div id="app">
-      <img class="marker" src="assets/marker.png" />
-      <img class="wheel" src="assets/wheel.png" />
-      <img class="button" src="assets/button.png" />
-    </div>
+<body>
+    <div id="weekday"></div>
+    <div id="mainbox" class="mainbox">
+        <img id="marker" class="marker" src="./assets/images/selector.png" />
+        <div id="box" class="box" src="assets/images/wheel.png">
+            <span class="person person1"><img class="selected" src="./assets/images/sticker.png" />40</span>
+            <span class="person person2"><img class="selected" src="./assets/images/sticker.png" />80</span>
+            <span class="person person3"><img class="selected" src="./assets/images/sticker.png" />125</span>
+            <span class="person person4"><img class="selected" src="./assets/images/sticker.png" />170</span>
+            <span class="person person5"><img class="selected" src="./assets/images/sticker.png" />215</span>
+            <span class="person person6"><img class="selected" src="./assets/images/sticker.png" />260</span>
+            <span class="person person7"><img class="selected" src="./assets/images/sticker.png" />305</span>
+            <span class="person person8"><img class="selected" src="./assets/images/sticker.png" />340</span>
+        </div>
+        <img id="spin" class="spin" src="assets/images/center.png" />
 
-    <script src="script.js"></script>
-  </body>
+        <script src="script.js "></script>
+</body>
+
 </html>

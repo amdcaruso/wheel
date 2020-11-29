@@ -1,46 +1,156 @@
-#app {
-    width: 400px;
-    height: 400px;
-    margin: 0 auto;
-    position: relative;
+/* Weekday */
+
+#weekday {
+    /* position: absolute; */
+    text-align: center;
+    font-size: 4vw;
+    top: 50px;
+    line-height: 60px;
+    font-family: 'Henny Penny', cursive;
 }
+
+body {
+    height: 100vh;
+    background: lightblue;
+}
+
+.mainbox {
+    position: relative;
+    width: 350px;
+    min-width: 350px;
+    height: 350px;
+    margin: 0 auto;
+}
+
+
+/* wheel */
+
+.box {
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    position: relative;
+    border-radius: 50%;
+    transition: all ease 3s;
+    background-image: url('assets/images/wheel.png');
+    background-repeat: no-repeat;
+    background-size: 100%;
+    /* transform: rotate(180deg); */
+    color: white;
+}
+
+.animateBox {
+    transition: 'all 2.6s ease-out';
+    transition-duration: '2.6s';
+}
+
+
+/* Spin Button */
+
+.spin {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: transparent;
+}
+
+.spin:active {
+    width: 120px;
+    height: 120px;
+}
+
+
+/* Adds error 404 - selected person */
+
+.selected {
+    height: 40px;
+    width: 70px;
+    display: none;
+}
+
+
+/* Top Marker */
 
 .marker {
     position: absolute;
     width: 60px;
-    left: 172px;
-    top: -20px;
+    left: 150px;
     z-index: 2;
 }
 
-.wheel {
-    width: 100%;
-    height: 100%
+.animate {
+    animation-name: movement;
+    animation-duration: 4s;
+    animation-timing-function: ease-out;
+    animation-delay: 0s;
+    animation-direction: alternate;
 }
 
-.button {
-    display: block;
-    width: 250px;
-    margin: 40px auto;
-    cursor: pointer;
-}
 
-.buttom:hover {
-    opacity: 0.8;
-}
+/* Adds movement to the marker */
 
-.blur {
-    animation: blur 10s;
-}
-
-@keyframes blur {
-    0% {
-        filter: blur(1.5px);
-    }
-    80% {
-        filter: blur(1.5px);
-    }
+@keyframes movement {
+    0%,
+    50%,
     100% {
-        filter: blur(0px);
+        transform: rotate(0deg);
     }
+    25% {
+        transform: rotate(-20deg);
+    }
+    40% {
+        transform: rotate(-10deg);
+    }
+    75% {
+        transform: rotate(20deg);
+    }
+    90% {
+        transform: rotate(10deg);
+    }
+}
+
+#box span {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 177px 75px 0;
+    border-color: blue transparent;
+    transform-origin: 70px 70px;
+    left: 50%;
+    top: 50%;
+    opacity: 1;
+}
+
+#box span:nth-child(1) {
+    transform: translate(-50%, -50%) rotate(40deg);
+}
+
+#box span:nth-child(2) {
+    transform: translate(-50%, -50%) rotate(80deg);
+}
+
+#box span:nth-child(3) {
+    transform: translate(-50%, -50%) rotate(125deg);
+}
+
+#box span:nth-child(4) {
+    transform: translate(-50%, -50%) rotate(170deg);
+}
+
+#box span:nth-child(5) {
+    transform: translate(-50%, -50%) rotate(215deg);
+}
+
+#box span:nth-child(6) {
+    transform: translate(-50%, -50%) rotate(260deg);
+}
+
+#box span:nth-child(7) {
+    transform: translate(-50%, -50%) rotate(305deg);
+}
+
+#box span:nth-child(8) {
+    transform: translate(-50%, -50%) rotate(360deg);
 }
