@@ -6,27 +6,19 @@
 
     // Defines variables
     let deg = 0;
-    let currentWinningNumber = 0;
-    let teamMembers = 8;
-    let segment = new Array(teamMembers);
-    let personArray = new Array(teamMembers);
-    let segmentArray = [40, 80, 125, 170, 215, 260, 305, 340];
-    let segmentArrayPerson = new Array(teamMembers);
+    let currentSelectedIndex = 0;
+    const numberOfTeamMembers = 8;
+    let segment = new Array(numberOfTeamMembers);
+    const personArray = new Array(numberOfTeamMembers);
+    const segmentArray = [40, 80, 125, 170, 215, 260, 305, 340];
+    let segmentArrayPerson = new Array(numberOfTeamMembers);
+
 
     // Adds Sound
     let snd = new Audio('./assets/sound.m4a');
 
     // Selected sticker per person
-    // const person0 = document.querySelector('#box > span.person.person0');
-    // const person1 = document.querySelector('#box > span.person.person1');
-    // const person2 = document.querySelector('#box > span.person.person2');
-    // const person3 = document.querySelector('#box > span.person.person3');
-    // const person4 = document.querySelector('#box > span.person.person4');
-    // const person5 = document.querySelector('#box > span.person.person5');
-    // const person6 = document.querySelector('#box > span.person.person6');
-    // const person7 = document.querySelector('#box > span.person.person7');
-
-    for (let i = 0; i < teamMembers; i++) {
+    for (let i = 0; i < numberOfTeamMembers; i++) {
         personArray[i] = document.querySelector(`#box > span.person.person${i}`);
     }
 
@@ -86,15 +78,15 @@
 
     // Lands on a person
     function hasFallenIntoThatRange() {
-        currentWinningNumber = Math.floor(Math.random() * segmentArray.length);
-        landedNumber = segmentArray[currentWinningNumber];
+        currentSelectedIndex = Math.floor(Math.random() * segmentArray.length);
+        landedNumber = segmentArray[currentSelectedIndex];
         console.log(
             segmentArray,
-            currentWinningNumber,
-            segmentArray[currentWinningNumber],
-            segment[segmentArray[currentWinningNumber]]
+            currentSelectedIndex,
+            segmentArray[currentSelectedIndex],
+            segment[segmentArray[currentSelectedIndex]]
         );
-        segmentArray.splice(currentWinningNumber, 1);
+        segmentArray.splice(currentSelectedIndex, 1);
         return landedNumber;
     }
 
@@ -109,8 +101,8 @@
 
     // Makes the selected sticker visible
     function addsSticker(person) {
-        let url = './assets/images/sticker.png';
-        let image = new Image();
+        const url = './assets/images/sticker.png';
+        const image = new Image();
         image.src = url;
         image.className = 'selected';
 
