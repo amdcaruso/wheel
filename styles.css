@@ -1,3 +1,8 @@
+/* :root {
+    --number: 0;
+} */
+
+
 /* Weekday */
 
 #weekday {
@@ -42,6 +47,7 @@ body {
 .animateBox {
     transition: 'all 2.6s ease-out';
     transition-duration: '2.6s';
+    transform: rotate(360deg);
 }
 
 
@@ -82,7 +88,7 @@ body {
 
 .animate {
     animation-name: movement;
-    animation-duration: 4s;
+    animation-duration: 2.6s;
     animation-timing-function: ease-out;
     animation-delay: 0s;
     animation-direction: alternate;
@@ -116,41 +122,22 @@ body {
     width: 0;
     height: 0;
     border-style: solid;
-    border-width: 177px 75px 0;
+    border-width: 180px 0 0;
     border-color: transparent;
     left: 50%;
-    top: 50%;
+    top: 26%;
     opacity: 1;
 }
 
-#box span:nth-child(1) {
-    transform: translate(-50%, -50%) rotate(40deg);
+.spinTransitionEnded {
+    pointer-events: 'auto';
 }
 
-#box span:nth-child(2) {
-    transform: translate(-50%, -50%) rotate(80deg);
+.boxTransitionEnded {
+    transition: 'none';
 }
 
-#box span:nth-child(3) {
-    transform: translate(-50%, -50%) rotate(125deg);
-}
 
-#box span:nth-child(4) {
-    transform: translate(-50%, -50%) rotate(170deg);
-}
-
-#box span:nth-child(5) {
-    transform: translate(-50%, -50%) rotate(215deg);
-}
-
-#box span:nth-child(6) {
-    transform: translate(-50%, -50%) rotate(260deg);
-}
-
-#box span:nth-child(7) {
-    transform: translate(-50%, -50%) rotate(305deg);
-}
-
-#box span:nth-child(8) {
-    transform: translate(-50%, -50%) rotate(360deg);
-}
+/* .rotates {
+    transform: rotate(var(--number)deg);
+} */
