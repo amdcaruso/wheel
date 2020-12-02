@@ -5,9 +5,10 @@
     const marker = document.querySelector('.marker');
 
     // Defines variables
-    let deg = 0;
     let initialDegree = 0;
+    let slice = 0;
     let currentSelectedIndex = 0;
+    let winningPossibilities = [0, 1, 2, 3, 4, 5, 6, 7];
     const numberOfTeamMembers = 8;
     const personArray = new Array(numberOfTeamMembers);
 
@@ -44,40 +45,35 @@
 
     // Lands on a person
     function hasFallenIntoThatRange() {
-        currentSelectedIndex = Math.floor(Math.random() * personArray.length);
-        let landedPerson = personArray.slice(currentSelectedIndex, 1);
-        console.log(landedPerson);
-        return landedPerson;
-    }
-
-    // Checks if everyone has been selected
-    function hasEveryOneBeenSelected() {
-        // if (segmentArray === undefined || segmentArray.length === 0) {
-        // alert("Everyone's been selected!");
-        // spin.disabled = true;
-        return;
-        // }
+        if (!winningPossibilities.length) {
+            alert("Everyone has been selected");
+            return;
+        }
+        currentSelectedIndex = Math.floor(Math.random() * winningPossibilities.length);
+        slice = winningPossibilities.splice(currentSelectedIndex, 1);
+        return slice * 45;
     }
 
     // Makes the selected sticker visible
-    function addsSticker(person) {
+    function addsSticker() {
         const url = './assets/images/sticker.png';
         const image = new Image();
 
         image.src = url;
         image.className = 'selected';
-
+        person = personArray[slice];
         person.appendChild(image);
     }
 
     // On click on the spin button
     spin.addEventListener('click', () => {
-        hasEveryOneBeenSelected();
-        hasFallenIntoThatRange();
-        // spin.getElementsByClassName.pointerEvents = 'none';
+        let currentPerson = hasFallenIntoThatRange();
+        spin.getElementsByClassName.pointerEvents = 'none';
+        box.style.transform = `rotate(${(180-currentPerson)}deg)`
         marker.classList.add('animate');
         box.classList.add('animateBox');
-        addsSticker(personArray[currentSelectedIndex]);
+        setTimeout(() => { addsSticker(currentPerson); }, 1500);
+
     });
 
     // When the transition ends
