@@ -6,9 +6,9 @@
 
     // Defines variables
     let initialDegree = 0;
-    let slice = 0;
+    let slice = -1;
     let currentSelectedIndex = 0;
-    let winningPossibilities = [0, 1, 2, 3, 4, 5, 6, 7];
+    let winningPossibilities = [...Array(document.querySelectorAll('.person').length).keys()];
     const numberOfTeamMembers = 8;
     const personArray = new Array(numberOfTeamMembers);
 
@@ -17,17 +17,14 @@
 
     // Initiates the wheel adding each person on the wheel
     for (let i = 0; i < numberOfTeamMembers; i++) {
-        personArray[i] = document.querySelector(`#box > span.person.person${i}`);
+        personArray[i] = document.querySelector(`.person${i}`);
         personArray[i].style.transform = `rotate(${initialDegree+=45}deg)`
-            // rotates.setProperty('--number', initialDegree += 45)
-            // personArray[i].classList.add('rotates');
     }
 
     // Gets week day
     function getWeekDay() {
-        let d = new Date();
-        let weekday = new Array(7);
-        weekday = [
+        let day = new Date();
+        const dailyMessage = [
             'Come back tomorrow 10am!',
             'Monday',
             'Tuesday',
@@ -37,8 +34,8 @@
             "It's the weekend, what are you doing here?",
         ];
 
-        let n = weekday[d.getDay()];
-        document.getElementById('weekday').innerHTML = n;
+        let weekday = dailyMessage[day.getDay()];
+        document.getElementById('weekday').innerHTML = weekday;
     }
 
     getWeekDay();
@@ -61,7 +58,9 @@
 
         image.src = url;
         image.className = 'selected';
-        person = personArray[slice];
+        let person = personArray[slice];
+
+        console.log(slice, person);
         person.appendChild(image);
     }
 
@@ -69,10 +68,10 @@
     spin.addEventListener('click', () => {
         let currentPerson = hasFallenIntoThatRange();
         spin.getElementsByClassName.pointerEvents = 'none';
-        box.style.transform = `rotate(${(180-currentPerson)}deg)`
+        box.style.transform = `rotate(${(150-currentPerson)}deg)`
         marker.classList.add('animate');
         box.classList.add('animateBox');
-        setTimeout(() => { addsSticker(currentPerson); }, 1500);
+        setTimeout(() => { addsSticker(currentPerson); }, 2500);
 
     });
 
