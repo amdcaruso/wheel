@@ -148,6 +148,7 @@ body {
         margin-bottom: 2%;
     }
     .mainbox {
+        font-size: 25px;
         width: 675px;
         min-width: 675px;
         height: 675px;
@@ -159,7 +160,7 @@ body {
         z-index: 2;
     }
     #box span {
-        border-width: 360px 0 0;
+        border-width: 350px 0 0;
     }
     .spin {
         width: 130px;
@@ -187,7 +188,7 @@ body {
         height: 600px;
     }
     #box span {
-        border-width: 360px 0 0;
+        border-width: 330px 0 0;
     }
     .spin {
         width: 145px;
