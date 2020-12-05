@@ -10,14 +10,16 @@
     let currentSelectedIndex = 0;
     let rotationIncrement = 0;
     let winningPossibilities = [...Array(document.querySelectorAll('.person').length).keys()];
+
+    // Defines constants
     const numberOfTeamMembers = 8;
     const personArray = new Array(numberOfTeamMembers);
 
-    // Adds Sound
+    // Adds Wheel ratatata Sound
     let snd = new Audio('./assets/sound.m4a');
 
 
-    // Initiates the wheel adding each person on the wheel
+    // Initiates the wheel by adding each on the correct position
     for (let i = 0; i < numberOfTeamMembers; i++) {
         personArray[i] = document.querySelector(`.person${i}`);
         personArray[i].style.transform = `rotate(${initialDegree+=45}deg)`;
@@ -60,26 +62,32 @@
 
         image.src = url;
         image.className = 'selected';
+
         let person = personArray[slice];
         person.appendChild(image);
     }
 
     // On click on the spin button
     spin.addEventListener('click', () => {
-        // Disable button during spin
+        // Disables button during spin
         spin.style.pointerEvents = 'none';
-        let currentPerson = hasFallenIntoThatRange();
+        // Adds animations
         marker.classList.add('animate');
         box.classList.add('animateBox');
+
+        let currentPerson = hasFallenIntoThatRange();
         rotationIncrement += 720;
-        box.style.transform = `rotate(${(165-currentPerson+rotationIncrement)}deg)`
+        //Rotates the wheel
+        box.style.transform = `rotate(${(165-currentPerson+rotationIncrement)}deg)`;
+        //Plays the ratatata sound
         snd.play();
+        // Adds the sticker after the below added seconds
         setTimeout(() => { addsSticker(currentPerson); }, 3000);
     });
 
     // When the transition ends
     box.addEventListener('transitionend', () => {
-        // Enable button when spin is over
+        // Enables button when spin is over
         spin.style.pointerEvents = 'auto';
     });
 })();
