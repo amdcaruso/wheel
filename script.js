@@ -8,6 +8,7 @@
     let initialDegree = 0;
     let slice = -1;
     let currentSelectedIndex = 0;
+    let rotationIncrement = 0;
     let winningPossibilities = [...Array(document.querySelectorAll('.person').length).keys()];
     const numberOfTeamMembers = 8;
     const personArray = new Array(numberOfTeamMembers);
@@ -15,10 +16,11 @@
     // Adds Sound
     let snd = new Audio('./assets/sound.m4a');
 
+
     // Initiates the wheel adding each person on the wheel
     for (let i = 0; i < numberOfTeamMembers; i++) {
         personArray[i] = document.querySelector(`.person${i}`);
-        personArray[i].style.transform = `rotate(${initialDegree+=45}deg)`
+        personArray[i].style.transform = `rotate(${initialDegree+=45}deg)`;
     }
 
     // Gets week day
@@ -59,26 +61,25 @@
         image.src = url;
         image.className = 'selected';
         let person = personArray[slice];
-
-        console.log(slice, person);
         person.appendChild(image);
     }
 
     // On click on the spin button
     spin.addEventListener('click', () => {
+        // Disable button during spin
+        spin.style.pointerEvents = 'none';
         let currentPerson = hasFallenIntoThatRange();
-        spin.getElementsByClassName.pointerEvents = 'none';
-        box.style.transform = `rotate(${(150-currentPerson)}deg)`
         marker.classList.add('animate');
         box.classList.add('animateBox');
-        setTimeout(() => { addsSticker(currentPerson); }, 2500);
-
+        rotationIncrement += 720;
+        box.style.transform = `rotate(${(165-currentPerson+rotationIncrement)}deg)`
+        snd.play();
+        setTimeout(() => { addsSticker(currentPerson); }, 3000);
     });
 
     // When the transition ends
-    spin.addEventListener('transitionend', () => {
-        box.classList.remove('animateBox');
-        spin.classList.add('spinTransitionEnded');
-        box.classList.add('boxTransitionEnded');
+    box.addEventListener('transitionend', () => {
+        // Enable button when spin is over
+        spin.style.pointerEvents = 'auto';
     });
 })();
